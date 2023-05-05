@@ -22,7 +22,7 @@
         <img src="assets/logoBlack.png" alt="logo"/>
       </div>
 
-      <div class="links">
+      <div *ngIf="!isMobile || (displayNav && isMobile)" class="links">
         <div (click)="showNav()" class="mobile-bg-nav"></div>
         <div class="links_btn">
           <img src="assets/homeLogo.png" alt="user logo"/>
