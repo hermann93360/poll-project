@@ -1,0 +1,114 @@
+<div class="shapes-container">
+  <div class="static-shape background-shape-main"></div>
+
+  <div class="animation-shape shape-triangle">
+    <div class="animation--rotating"></div>
+  </div>
+
+  <div class="static-shape pattern-dots-2"></div>
+
+  <div class="shape-ring shape-ring-1">
+    <div class="animation animation--rotating"></div>
+  </div>
+</div>
+
+<div class="container">
+  <nav>
+    <div class="navbar">
+      <div (click)="showNav()" class="mobile-icon-nav">
+        <img src="assets/nav.png" alt="nav" />
+      </div>
+      <div class="logo icon">
+        <img src="assets/logoBlack.png" alt="logo"/>
+      </div>
+
+      <div class="links">
+        <div (click)="showNav()" class="mobile-bg-nav"></div>
+        <div class="links_btn">
+          <img src="assets/homeLogo.png" alt="user logo"/>
+          <p>Home</p>
+        </div>
+        <div class="links_btn">
+          <img src="assets/userLot.png" alt="user logo"/>
+          <p>A propos</p>
+        </div>
+        <div [routerLink]="['/users/login']" class="links_btn">
+          <img src="assets/userLogo2.png" alt="user logo"/>
+          <p>Connexion</p>
+        </div>
+        <div [routerLink]="['/users/create']" class="links_btn">
+          <img src="assets/userLogoSign.png" alt="user logo"/>
+          <p>Inscription</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-home">
+    <div class="content">
+      <div class="left-section">
+        <div class="titles">
+          <h2>Juger.</h2>
+          <h2>Penser.</h2>
+          <h2>Noter.</h2>
+        </div>
+
+        <div class="description">
+          <p>Votez en ligne en toute simplicité avec poll project !
+            Créez des sondages et des scrutins personnalisés en quelques minutes seulement grâce à une interface
+            intuitive et sécurisée.
+            Organisez des votes pour tous vos événements</p>
+        </div>
+
+        <button class="btn"> Essayez maintenant !</button>
+      </div>
+      <div class="right-section">
+        <div class="img_contain">
+          <img src="assets/dashbord.png"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-about">
+      <h2 class="title-section"> Qu'est ce qu'on propose ?</h2>
+
+      <p class="description">
+        Découvrez les fonctionnalités que nous offrons dans cette section dédiée à notre gamme de solutions
+        de vote en ligne, répondant à vos besoins spécifiques pour des élections, des sondages et des scrutins en toute
+        transparence et sécurité.
+      </p>
+
+      <div class="items">
+        <div class="card">
+          <div class="img-card">
+            <img src="assets/star.png" alt="star"/>
+          </div>
+          <p>Personnalisez la notation de vos salons de vote en ligne selon vos préférences avec notre plateforme. Vous
+            pouvez choisir l'échelle de notation
+            qui convient le mieux à votre sujet de vote pour une évaluation plus précise et pertinente de vos
+            propositions.</p>
+        </div>
+        <div class="card">
+          <div class="img-card">
+            <img src="assets/live.png" alt="live"/>
+
+          </div>
+          <p>Observez en temps réel l'évolution des résultats de vos votes grâce à notre fonctionnalité de suivi en
+            direct. Vous pouvez ainsi suivre l'avancement
+            de votre session de vote et obtenir rapidement des informations clés sur les tendances de vote
+            émergentes.</p>
+        </div>
+        <div class="card">
+          <div class="img-card">
+            <img src="assets/setting.png" alt="setting"/>
+
+          </div>
+          <p>Personnalisez votre salon de vote en ligne à votre guise grâce à notre large gamme de réglages. Vous pouvez
+            ajuster les paramètres de votre session
+            de vote pour répondre à vos besoins spécifiques et garantir une expérience de vote optimale pour vos
+            participants.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
