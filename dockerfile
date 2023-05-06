@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN npm install -g @angular/cli
 RUN npm install
-RUN ng build --prod
+RUN ng build -prod
 
 FROM nginx:1.17.1-alpine
 COPY --from=build /app/default.conf /etc/nginx/conf.d/default.conf
