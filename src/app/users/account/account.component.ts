@@ -1,8 +1,10 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {CreateUserRequest} from "../../../model/CreateUserRequest";
+import {CreateUserRequest} from "../../../model/request/CreateUserRequest";
 import {UsersManagementService} from "../../../service/users-management.service";
+import {Error, UserError} from "../../../model/Error";
+import {CreateUserForm} from "../../../model/form/CreateAccountForm";
 
 @Component({
   selector: 'app-account',
@@ -21,8 +23,13 @@ export class AccountComponent implements OnInit {
   public classNamesCheckPassword!: string;
   public classNamesSubmit!: string;
 
+  public userError!: UserError;
+  public createUserForm!: CreateUserForm;
+
   constructor(private formBuilder: FormBuilder, public router: Router, private userManagementService: UsersManagementService) {
     this.initCreateAccountForm();
+    this.userError = new UserError();
+    this.createUserForm = new CreateUserForm();
   }
 
   ngOnInit(): void {
@@ -43,7 +50,6 @@ export class AccountComponent implements OnInit {
   }
 
   createAccount() {
-    console.log("ok")
     if (this.createAccountForm.valid) {
       const createAccountFormValue = this.createAccountForm.value;
 
@@ -60,18 +66,12 @@ export class AccountComponent implements OnInit {
           createAccountFormValue['password'],
         )
 
-        this.userManagementService.createUser(request).subscribe(
-          () => {
-            console.log("created!");
-          },
-          (error) => {
-            console.log("error " + error)
-          },
-          () => {
-            console.log("completed!")
-          }
-        )
+        this.userManagementService.createUser(request);
+
+        this.userError = this.userManagementService.userError.value;
       }
+    }else{
+      this.userError.setCurrentError(Error.FORM_ERROR);
     }
   }
 
@@ -82,9 +82,11 @@ export class AccountComponent implements OnInit {
   public checkPasswordForm(password: string, passwordToChek: string) {
     if(this.checkPassword(password, passwordToChek)){
       this.classNamesCheckPassword = "";
+      this.createUserForm.checkPasswordValid();
     }
     else {
       this.classNamesCheckPassword = "input-incorrect";
+      this.createUserForm.checkPasswordNotValid();
     }
   }
 
@@ -97,8 +99,10 @@ export class AccountComponent implements OnInit {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (this.checkEmailAdress(value)) {
       this.classNamesEmail = ""
+      this.createUserForm.emailValid();
     } else {
       this.classNamesEmail = "input-incorrect";
+      this.createUserForm.emailNotValid();
     }
   }
 
@@ -110,8 +114,10 @@ export class AccountComponent implements OnInit {
   checkIsStrongPasswordForm(value: string) {
     if (this.checkIsStrongPassword(value)) {
       this.classNamesPassword = ""
+      this.createUserForm.passwordValid();
     } else {
       this.classNamesPassword = "input-incorrect";
+      this.createUserForm.passwordNotValid();
     }
   }
 }

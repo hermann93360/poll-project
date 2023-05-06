@@ -243,6 +243,49 @@
 .static-shape {
   position: absolute;
 }
+.animation-shape.shape-cross{
+  top: 35%;
+  left: 85%;
+}
+.animation-shape{
+  position: absolute;
+  display: -webkit-box;
+  display: flex;
+}
+.animation-shape.shape-cross div {
+  position: relative;
+  background: #fff;
+  width: 3px;
+  height: 50px;
+}
+.animation--rotating {
+  -webkit-animation: rotating 15s linear infinite normal;
+  animation: rotating 15s linear infinite normal;
+}
+.animation-shape.shape-cross div::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  height: 3px;
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+@media (max-width: 1024px) {
+  .animation-shape.shape-cross div {
+    background: black;
+
+
+  }
+
+  .animation-shape.shape-cross div::after {
+    background: black;
+
+
+  }
+}
 
 
 .container-home {

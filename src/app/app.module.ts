@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {AuthGuardService} from "../service/auth-guard.service";
 
 const appRoutes: Routes = [
   {
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
       },
     ]
   },
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: '', component: HomeComponent},
 ];
 
@@ -35,6 +38,7 @@ const appRoutes: Routes = [
     AuthenticationComponent,
     AccountComponent,
     HomeComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

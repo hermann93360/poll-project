@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UsersManagementService} from "../../../service/users-management.service";
-import {CreateUserRequest} from "../../../model/CreateUserRequest";
-import {LoginRequest} from "../../../model/LoginRequest";
+import {CreateUserRequest} from "../../../model/request/CreateUserRequest";
+import {LoginRequest} from "../../../model/request/LoginRequest";
+import {Error, UserError} from "../../../model/Error";
 
 @Component({
   selector: 'app-authentication',
@@ -12,9 +13,11 @@ import {LoginRequest} from "../../../model/LoginRequest";
 })
 export class AuthenticationComponent {
   public loginForm!: FormGroup;
+  public userError!: UserError;
 
   constructor(private formBuilder: FormBuilder, public router: Router, private userManagementService: UsersManagementService) {
     this.initloginForm();
+    this.userError = new UserError();
   }
 
   private initloginForm() {
@@ -33,17 +36,12 @@ export class AuthenticationComponent {
         loginFormValue['password']
       )
 
-      this.userManagementService.login(request).subscribe(
-        (value) => {
-          console.log(value);
-        },
-        (error) => {
-          console.log("error " + error)
-        },
-        () => {
-          console.log("completed!")
-        }
-      )
+      this.userManagementService.login(request);
+
+
+      this.userError = this.userManagementService.userError.value
+    }else{
+      this.userError.setCurrentError(Error.FORM_ERROR);
     }
   }
 }

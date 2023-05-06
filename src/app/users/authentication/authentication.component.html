@@ -15,4 +15,8 @@
   <div class="bottom-description">
     <p> Vous n'avez pas de compte ?  <span [routerLink]="['/users/create']"> Inscrivez vous rapidement ! </span></p>
   </div>
+
+  <div *ngIf="userError.isError()" class="error-message">
+    <p>{{userError.getMessage()}}</p>
+  </div>
 </div>
