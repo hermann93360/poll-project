@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <div class="container">
+
+    <div class="cross" (click)="hideNavMethod()">
+      <span class="material-symbols-sharp">close</span>
+    </div>
+    <div class="header section">
+      <img src="assets/logo.png" alt="logo">
+    </div>
+    <line-component></line-component>
+    <div class="body section">
+      <button-nav-component (click)="showBelowNavProfil()" name="Brooklyn Alicia" icon_path="assets/profil.jpeg" type="profil" multiple="true"></button-nav-component>
+      <div class="buttons-hidden" *ngIf="belowNavyProfile">
+        <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
+      </div>
+    </div>
+    <line-component color="white"></line-component>
+    <div class="section" >
+      <button-nav-component name="Dashboard" icon_path="dashboard" type="nav" ></button-nav-component>
+      <h1>Navigation</h1>
+      <button-nav-component (click)="showBelowPollingStation()" name="Gestion de salon" icon_path="grade" type="nav" multiple="true"></button-nav-component>
+      <div class="buttons-hidden" *ngIf="belowNavPollingStation">
+        <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
+      </div>
+    </div>
+    <line-component color="white"></line-component>
+    <div class="footer section" >
+      <h1>Autres</h1>
+      <button-nav-component (click)="showBelowPollingStation()" name="Gestion de salon" icon_path="grade" type="nav" multiple="true"></button-nav-component>
+      <div class="buttons-hidden" *ngIf="belowNavPollingStation">
+        <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
+        <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
+      </div>
+    </div>
+  </div>
+</nav>

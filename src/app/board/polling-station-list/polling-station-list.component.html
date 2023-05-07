@@ -1,0 +1,18 @@
+<div class="list">
+  <div class="container">
+    <div class="header">
+      <div class="header-icon">
+        <span class="material-symbols-sharp">settings</span>
+      </div>
+      <h1> Salons de vote </h1>
+    </div>
+
+    <div class="body">
+      <polling-station-card-component [creator]="pollingStationList[0]?.nameOfAdministrator" [category]="pollingStationList[0]?.category" [name]="pollingStationList[0]?.name" [type]="pollingStationList[0]?.pollType"></polling-station-card-component>
+      <div class="repeat" *ngFor="let ps of pollingStationDisplaying()" >
+        <line-component color="black"></line-component>
+        <polling-station-card-component [creator]="ps.nameOfAdministrator" [category]="ps.category" [name]="ps.name" [type]="ps.pollType"></polling-station-card-component>
+      </div>
+    </div>
+  </div>
+</div>

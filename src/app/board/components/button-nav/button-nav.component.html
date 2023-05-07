@@ -1,0 +1,16 @@
+<div [class]="'button ' + content">
+
+  <div class="container">
+    <div class="data">
+      <div [class]="iconClass">
+        <img *ngIf="isButtonProfil(); else icon_representation" [src]="icon_path" alt="icons"/>
+        <ng-template #icon_representation>
+          <span class="material-symbols-sharp">{{icon_path}}</span>
+      </ng-template>
+      </div>
+      <p>{{name}}</p>
+    </div>
+    <span *ngIf="isButtonMultiple()" class="material-symbols-sharp arrow"> expand_more </span>
+  </div>
+
+</div>

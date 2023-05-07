@@ -1,22 +1,21 @@
 import {Component, HostListener} from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss']
 })
-export class HomeComponent {
+export class BoardComponent {
 
-  displayNav!: boolean;
-  isMobile!: boolean;
+  public isMobile: boolean = false;
+  public displayNav: any | boolean;
+
   constructor() {
-    this.displayNav = false;
-
     this.setIsMobile(window.innerWidth);
-
   }
-  showNav() {
-    this.displayNav = !this.displayNav;
+
+  showNav(data: boolean) {
+    this.displayNav = data;
   }
 
   @HostListener('window:resize', ['$event'])

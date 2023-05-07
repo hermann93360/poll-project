@@ -1,0 +1,76 @@
+.padding{
+  padding: 18px;
+}
+.padding-null{
+  padding-right: 18px;
+  padding-left: 18px;
+  padding-top: 0;
+}
+.button {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: "Roboto", serif;
+    color: white;
+    font-weight: 300;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: all 200ms ease-in-out 0s;
+    box-sizing: border-box;
+
+    .data {
+      display: flex;
+      align-items: center;
+
+    }
+
+    .icon {
+      position: relative;
+      display: flex;
+      -moz-box-align: center;
+      justify-content: center;
+      align-items: flex-start;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      line-height: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      user-select: none;
+      background: transparent;
+      color: rgb(255, 255, 255);
+      font-weight: 400;
+      width: 2.25rem;
+      height: 2.25rem;
+      font-size: 0.875rem;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+        text-align: center;
+        object-fit: cover;
+        color: transparent;
+        text-indent: 10000px;
+        height: auto;
+      }
+    }
+    .icon-representation {
+        width: 2.25rem;
+        height: 2.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+  }
+  .container:hover {
+    background-color: rgb(95, 95, 107);
+  }
+}

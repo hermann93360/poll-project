@@ -1,0 +1,12 @@
+<div class="parent">
+  <div class="section nav-section" *ngIf="!isMobile || (displayNav && isMobile)">
+    <app-board-nav (showNav)="showNav($event)"></app-board-nav>
+  </div>
+  <div class="section dashboard-section">
+    <app-header-dash (showNav)="showNav($event)"></app-header-dash>
+
+    <div class="element">
+      <app-polling-station-list class="pollingStation"></app-polling-station-list>
+    </div>
+  </div>
+</div>

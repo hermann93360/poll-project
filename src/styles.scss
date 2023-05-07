@@ -3,7 +3,9 @@
   margin: 0;
   padding: 0;
 }
-
+p, h1, h2, h3{
+  margin: 0 !important;
+}
 .btn {
   font-family: couture, serif;
   padding: 10px;
@@ -16,6 +18,9 @@
 .btn:hover{
   background: #522d5e;
   cursor: pointer;
+}
+body{
+  background-color: rgb(240, 242, 245);
 }
 
 //font
@@ -51,3 +56,6 @@
   font-family: "rockstar";
   src: url('assets/fonts/rockstar.otf');
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

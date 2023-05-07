@@ -1,0 +1,20 @@
+.line {
+  flex-shrink: 0;
+  border-width: 0 0 medium;
+  border-style: solid solid none;
+  border-color: rgba(0, 0, 0, 0.08) rgba(0, 0, 0, 0.08) currentcolor;
+  height: 0.0625rem;
+  opacity: 0.25;
+  width: 100%;
+  background-color: transparent;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255), rgba(255, 255, 255, 0)) !important;
+}
+
+.white {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255), rgba(255, 255, 255, 0)) !important;
+}
+
+.black{
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(0, 0, 0), rgba(255, 255, 255, 0)) !important;
+
+}
