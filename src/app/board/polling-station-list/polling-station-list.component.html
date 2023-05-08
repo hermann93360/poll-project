@@ -7,12 +7,27 @@
       <h1> Salons de vote </h1>
     </div>
 
+    <div class="add-btn">
+      <app-button-dashboard (click)="showPollingStationForm()" icon="library_add" label="Créer un salon"></app-button-dashboard>
+      <app-button-dashboard class="join-polling" icon="groups_3" label="Rejoindre un salon"></app-button-dashboard>
+    </div>
+
     <div class="body">
-      <polling-station-card-component [creator]="pollingStationList[0]?.nameOfAdministrator" [category]="pollingStationList[0]?.category" [name]="pollingStationList[0]?.name" [type]="pollingStationList[0]?.pollType"></polling-station-card-component>
-      <div class="repeat" *ngFor="let ps of pollingStationDisplaying()" >
+      <div class="repeat">
+        <polling-station-card-component [creator]="pollingStationList[0]?.nameOfAdministrator"
+                                        [category]="pollingStationList[0]?.category"
+                                        [name]="pollingStationList[0]?.name"
+                                        [type]="pollingStationList[0]?.pollType"></polling-station-card-component>
+      </div>
+      <div class="repeat" *ngFor="let ps of pollingStationDisplaying()">
         <line-component color="black"></line-component>
-        <polling-station-card-component [creator]="ps.nameOfAdministrator" [category]="ps.category" [name]="ps.name" [type]="ps.pollType"></polling-station-card-component>
+        <polling-station-card-component [creator]="ps.nameOfAdministrator" [category]="ps.category" [name]="ps.name"
+                                        [type]="ps.pollType"></polling-station-card-component>
       </div>
     </div>
+
   </div>
+  <app-create-polling-station-form *ngIf="displayPollingStationForm"></app-create-polling-station-form>
+
 </div>
+

@@ -22,7 +22,79 @@ p, h1, h2, h3{
 body{
   background-color: rgb(240, 242, 245);
 }
+.mat-mdc-text-field-wrapper {
+  background-color: white !important;
+}
+.mat-mdc-form-field-focus-overlay {
+  background-color: white !important;
+}
+.mat-mdc-form-field-infix label {
+  font-family: Roboto;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header, .mat-vertical-stepper-header {
+  padding: 0 !important;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  height: 4rem;
+}
+.mat-horizontal-stepper-header-container{
+  margin-bottom: 50px;
+  background-color: transparent;
+}
+.mat-horizontal-stepper-wrapper{
+  position: relative;
+  width: 100%;
+}
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: transparent;
+}
+.mat-step-header .mat-step-label.mat-step-label-active {
+  color: rgba(255, 255, 255, 0.87);
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.mat-horizontal-stepper-header::before, .mat-horizontal-stepper-header::after, .mat-stepper-horizontal-line {
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+}
+.mat-step-header .mat-step-icon {
+  background-color: rgba(255, 255, 255, 0.54);
+  color: #6c1368;
+}
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #00000059;
+  color: #ffffff;
+}
+.mat-step-header .mat-step-header-ripple:hover {
+  background-color: transparent;
+}
+.mat-horizontal-content-container {
+  overflow: hidden;
+  padding: 0 !important;
+}
+.mdc-evolution-chip-set__chips {
+  min-width: 0;
+  display: flex !important;
+  justify-content: flex-end;
+  flex-flow: nowrap !important;
+  padding-right: 4px;
+  float: left;
+  white-space: nowrap;
+  max-width: calc(100% - 31px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mat-accordion{
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+.check .mdc-form-field {
+  width: 120px;
+}
 //font
 
 @font-face {

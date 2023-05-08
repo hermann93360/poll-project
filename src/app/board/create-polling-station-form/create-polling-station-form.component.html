@@ -1,0 +1,251 @@
+<div class="content">
+  <div class="container">
+    <div class="header">
+      <div class="header-banner">
+
+      </div>
+    </div>
+    <div [class]="'body ' + size">
+
+      <div class="title-padding">
+        <title-component label="Créer votre salon" size="regular"></title-component>
+
+      </div>
+      <form class="form-polling">
+
+
+        <mat-stepper labelPosition="bottom" #stepper>
+          <mat-step [stepControl]="createPollingStationForm.firstStepForm">
+            <form [formGroup]="createPollingStationForm.firstStepForm">
+              <ng-template matStepLabel>Informations</ng-template>
+
+              <div class="top">
+                <mat-form-field class="input" appearance="fill">
+                  <mat-label>Nom du salon</mat-label>
+                  <input matInput placeholder="Last name, First name" formControlName="name" required>
+                </mat-form-field>
+
+                <mat-form-field class="input" appearance="fill">
+                  <mat-label>Catégorie</mat-label>
+                  <mat-select formControlName="category">
+                    <mat-option value="etst">test</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="top">
+                <mat-form-field class="example-chip-list input-100" appearance="fill">
+                  <mat-label>Mot clés</mat-label>
+                  <mat-chip-grid formControlName="keywords" #chipGrid aria-label="Enter fruits">
+                    <mat-chip-row *ngFor="let fruit of keywords"
+                                  (removed)="remove(fruit)"
+                                  [editable]="true"
+                                  (edited)="edit(fruit, $event)"
+                                  [aria-description]="'press enter to edit ' + fruit.name">
+                      {{fruit.name}}
+                      <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+                    <input placeholder="Mot clés..."
+                           [matChipInputFor]="chipGrid"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="add($event)"/>
+                  </mat-chip-grid>
+                </mat-form-field>
+              </div>
+
+              <div class="top">
+                <mat-form-field class="input-100" appearance="fill">
+                  <mat-label>Description</mat-label>
+                  <input matInput placeholder="Last name, First name" formControlName="description" required>
+                </mat-form-field>
+
+              </div>
+
+              <div class="top-btn top">
+                <button class="btn-next btn-mat" (click)="display('size500')" matStepperNext
+                        [disabled]="!createPollingStationForm.firstStepForm.valid">
+                  <app-button-dashboard label="Suivant" icon="directions_run">Next</app-button-dashboard>
+                </button>
+              </div>
+
+            </form>
+          </mat-step>
+
+
+          <mat-step [stepControl]="createPollingStationForm.secondStepForm">
+            <form class="form" [formGroup]="createPollingStationForm.secondStepForm">
+              <ng-template matStepLabel>Parametrage</ng-template>
+              <div class="top check">
+
+                <section class="input">
+                  <label class="example-margin">Type de salon:</label><br>
+                  <mat-radio-group formControlName="pollType" color="accent">
+                    <mat-radio-button class="example-margin" value="LIVE">
+                      En direct
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="FREE">
+                      Libre
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </section>
+
+
+              </div>
+
+              <div class="top check">
+
+                <section class="input">
+                  <label class="example-margin">Confidentialité:</label><br>
+                  <mat-radio-group formControlName="scope" color="accent">
+                    <mat-radio-button class="example-margin" value="PUBLIC">
+                      Public
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="PRIVATE">
+                      Privé
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </section>
+
+
+              </div>
+
+              <div class="top">
+
+                <mat-slide-toggle
+                  class="input"
+                  [color]="'accent'"
+                  [checked]="false"
+                  [disabled]="false"
+                  formControlName="notationVisible">
+                  Les notations des autres membres sont visible
+                </mat-slide-toggle>
+
+
+              </div>
+              <div class="top-btn top">
+                <button class="btn-next btn-mat" matStepperPrevious>
+                  <app-button-dashboard (click)="display('size350')" label="Précédent"
+                                        icon="directions_run"></app-button-dashboard>
+                </button>
+                <button class="btn-previous btn-mat" matStepperNext
+                        [disabled]="!createPollingStationForm.secondStepForm.valid">
+                  <app-button-dashboard (click)="display('size500')" label="Suivant"
+                                        icon="sprint"></app-button-dashboard>
+                </button>
+              </div>
+            </form>
+          </mat-step>
+
+
+          <mat-step [stepControl]="createPollingStationForm.finalStep">
+            <form [formGroup]="createPollingStationForm.finalStep">
+              <ng-template matStepLabel>Fin</ng-template>
+              <p>Pour finir entrez les dates de début et de fin du salon</p>
+
+              <div class="top">
+                <mat-form-field class="input-100" appearance="fill">
+                  <mat-label>Type de notation</mat-label>
+                  <mat-select formControlName="typeNotation">
+                    <mat-option value="STAR">Par etoile</mat-option>
+                    <mat-option value="LETTER">Par lettre</mat-option>
+                    <mat-option value="SCALE10">Par echelle numérique 1 à 10</mat-option>
+                    <mat-option value="SCALE20">Par echelle numérique 1 à 20</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="top">
+                <mat-form-field class="input-100" appearance="fill">
+                  <mat-label>début - fin</mat-label>
+                  <mat-date-range-input [min]="today" [rangePicker]="picker">
+                    <input formControlName="startPoll" matStartDate placeholder="Start date">
+                    <input formControlName="endPoll" matEndDate placeholder="End date">
+                  </mat-date-range-input>
+                  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+              </div>
+
+              <div class="top">
+
+                <mat-accordion *ngIf="!displayFieldPrivate()">
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Choisir
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Nombre de personne max
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <section class="input-100">
+                      <label class="example-margin">Chpos</label><br>
+                      <mat-slider min="0" max="50" step="1" showTickMarks discrete>
+                        <input formControlName="userLimit" matSliderThumb>
+                      </mat-slider>
+                    </section>
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+
+              </div>
+
+              <div class="top">
+                <mat-form-field class="input-100" appearance="fill" *ngIf="displayFieldPrivate()">
+                  <mat-label>Favorite Fruits</mat-label>
+                  <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                    <mat-chip-row *ngFor="let fruit of fruits" (removed)="removeEmailInvited(fruit)">
+                      {{fruit}}
+                      <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+                    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+                           [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="addEmailInvited($event)"/>
+                  </mat-chip-grid>
+
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedEmailInvited($event)">
+                    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                      {{fruit}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="top">
+                <mat-form-field class="input-100" appearance="fill" *ngIf="displayFieldPrivate()">
+                  <mat-label>Mot de passe du salon</mat-label>
+                  <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div class="top top-btn">
+                <button class="btn-next btn-mat" matStepperPrevious>
+                  <app-button-dashboard label="Précédent" icon="directions_run">Next</app-button-dashboard>
+                </button>
+                <button class="btn-previous btn-mat" (click)="createPollingStation()"
+                        [disabled]="!createPollingStationForm.finalStep.valid">
+                  <app-button-dashboard label="Créer" icon="add_circle">Next</app-button-dashboard>
+                </button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-stepper>
+
+
+      </form>
+
+    </div>
+  </div>
+</div>

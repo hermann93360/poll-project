@@ -10,6 +10,7 @@ import {PollingStation} from "../../../model/PollingStation";
 export class PollingStationListComponent implements OnInit{
 
   public pollingStationList: PollingStation[] = []
+  public displayPollingStationForm: boolean = true;
 
   constructor(private pollingStationService: PollingStationService) {
   }
@@ -29,5 +30,7 @@ export class PollingStationListComponent implements OnInit{
   }
 
 
-
+  showPollingStationForm() {
+    this.displayPollingStationForm = !this.displayPollingStationForm;
+  }
 }

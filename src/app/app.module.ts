@@ -24,6 +24,21 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatInputModule} from "@angular/material/input";
 import { PollingStationListComponent } from './board/polling-station-list/polling-station-list.component';
 import { PollingStationCardComponent } from './board/components/polling-station-card/polling-station-card.component';
+import { ButtonDashboardComponent } from './board/components/button-dashboard/button-dashboard.component';
+import { CreatePollingStationFormComponent } from './board/create-polling-station-form/create-polling-station-form.component';
+import { TitleComponent } from './board/components/title/title.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatSelectModule} from "@angular/material/select";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import {CreatePollingStationForm} from "../model/form/CreatePollingStationForm";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 const appRoutes: Routes = [
   {
@@ -57,6 +72,9 @@ const appRoutes: Routes = [
     HeaderDashComponent,
     PollingStationListComponent,
     PollingStationCardComponent,
+    ButtonDashboardComponent,
+    CreatePollingStationFormComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +85,18 @@ const appRoutes: Routes = [
     NgOptimizedImage,
     BrowserAnimationsModule,
     MatSlideToggleModule,
-    MatInputModule
+    MatInputModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatIconModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
 
   ],
   exports: [
