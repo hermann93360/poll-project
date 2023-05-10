@@ -39,6 +39,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {CreatePollingStationForm} from "../model/form/CreatePollingStationForm";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { PollingStationUserListComponent } from './board/polling-station-user-list/polling-station-user-list.component';
+import { BarChartComponent } from './board/components/bar-chart/bar-chart.component';
+import { PopupComponent } from './board/components/popup/popup.component';
 
 const appRoutes: Routes = [
   {
@@ -75,6 +78,9 @@ const appRoutes: Routes = [
     ButtonDashboardComponent,
     CreatePollingStationFormComponent,
     TitleComponent,
+    PollingStationUserListComponent,
+    BarChartComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,

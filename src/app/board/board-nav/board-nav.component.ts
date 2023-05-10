@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {UsersManagementService} from "../../../service/users-management.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-board-nav',
@@ -10,12 +12,25 @@ export class BoardNavComponent {
   @Output() showNav = new EventEmitter<boolean>();
   public belowNavyProfile: boolean;
   public belowNavPollingStation: boolean;
+  public nameOfUserLogged!: string;
 
-  constructor() {
+  constructor(private userService: UsersManagementService, private router: Router) {
     this.belowNavyProfile = false;
     this.belowNavPollingStation = false;
+    this.getNameOfUserLogged();
   }
 
+  logout() {
+    this.router.navigate(['/'])
+    this.userService.logout();
+  }
+  getNameOfUserLogged() {
+    this.userService.getUser().subscribe(
+      (name) => {
+        this.nameOfUserLogged = name.username + " " + name.nickname;
+      }
+    )
+  }
   hideNavMethod() {
     this.showNav.emit(false);
   }

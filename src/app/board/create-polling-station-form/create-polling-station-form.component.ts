@@ -1,11 +1,12 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
 import {CreatePollingStationForm} from "../../../model/form/CreatePollingStationForm";
 import {PollingStationService} from "../../../service/polling-station.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
-import {Observable} from "rxjs";
+import {map, Observable, startWith} from "rxjs";
+import {UsersManagementService} from "../../../service/users-management.service";
 
 interface Pokemon {
   value: string;
@@ -21,8 +22,9 @@ export interface Keyword {
   templateUrl: './create-polling-station-form.component.html',
   styleUrls: ['./create-polling-station-form.component.scss']
 })
-export class CreatePollingStationFormComponent {
+export class CreatePollingStationFormComponent implements OnInit{
 
+  @Output() pollingStationCreated = new EventEmitter<boolean>();
   today = new Date();
   pokemonControl = new FormControl('');
 
@@ -35,9 +37,15 @@ export class CreatePollingStationFormComponent {
 
   public createPollingStationForm: CreatePollingStationForm;
 
-  constructor(private _formBuilder: FormBuilder, private pollingStationService: PollingStationService) {
+  constructor(private _formBuilder: FormBuilder, private pollingStationService: PollingStationService, private usersService: UsersManagementService) {
     this.createPollingStationForm = new CreatePollingStationForm(_formBuilder);
+    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allMembers.slice())),
+    );
   }
+
+
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -74,9 +82,15 @@ export class CreatePollingStationFormComponent {
     }
   }
 
+  disabledbutton() {
+    return !this.createPollingStationForm.finalStep.valid &&
+      (this.createPollingStationForm.isPrivate() && this.createPollingStationForm.secondStepForm.value['password']?.length == 0) ||
+      (!this.createPollingStationForm.isPrivate() && this.createPollingStationForm.secondStepForm?.value['userLimit'] == 0);
+  }
   createPollingStation() {
     const createPollingStationRequest = this.createPollingStationForm.constructRequest();
     this.pollingStationService.createPollingStation(createPollingStationRequest)
+    this.pollingStationCreated.emit(true);
   }
 
   displayFieldPrivate() {
@@ -93,41 +107,48 @@ export class CreatePollingStationFormComponent {
 
     // Add our fruit
     if (value) {
-      this.fruits.push(value);
     }
 
     // Clear the input value
     event.chipInput!.clear();
 
-    this.fruitCtrl.setValue(null);
+    this.memberCtrl.setValue(null);
   }
 
   removeEmailInvited(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.member.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.member.splice(index, 1);
     }
   }
 
 
-  fruitCtrl = new FormControl('');
-  filteredFruits: Observable<string[]> | undefined;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  memberCtrl = new FormControl('');
+  filteredMembers: Observable<string[]> | undefined;
+  member: string[] = [];
+  allMembers: string[] = [];
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
   size!: string;
 
+  ngOnInit(): void {
+    this.usersService.users.subscribe(
+      (value) => {
+        this.allMembers = value.map(user => user.email)
+      }
+    )
+  }
+
   selectedEmailInvited(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+    this.member.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.memberCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    return this.allMembers.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
 
   display(size: string) {

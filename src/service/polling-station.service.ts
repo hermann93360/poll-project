@@ -17,11 +17,29 @@ export class PollingStationService {
 
   private URL = environment.URL;
   public pollingStation: BehaviorSubject<PollingStation[]> = new BehaviorSubject<PollingStation[]>(PollingStation.EMPTY_LIST);
+  public pollingStationToUser: BehaviorSubject<PollingStation[]> = new BehaviorSubject<PollingStation[]>(PollingStation.EMPTY_LIST);
 
   constructor(private http: HttpClient, private router: Router, private userService: UsersManagementService) {
+    this.getAllPollingStation();
+    this.getAllPollingStationToUser();
+  }
+
+  getAllPollingStationToUser() {
+    const path = "/polling-station/";
+    this.http.get<any>(this.URL + path, {headers: this.userService.getHeader()}).subscribe(
+      (value) => {
+        this.pollingStationToUser.next(value.pollingStationDtoList);
+        console.log("taked!");
+      },
+      (error) => {
+      },
+      () => {
+        console.log("completed!")
+      }
+    );
   }
   getAllPollingStation() {
-    const path = "/pollingStation";
+    const path = "/polling-station/all";
     this.http.get<any>(this.URL + path, {headers: this.userService.getHeader()}).subscribe(
       (value) => {
 
@@ -40,7 +58,7 @@ export class PollingStationService {
   }
 
   createPollingStation(createPollingStationRequest: CreatePollingStationRequest) {
-    const path = "/pollingStation/create";
+    const path = "/polling-station/create";
     this.http.post(this.URL + path, createPollingStationRequest,{headers: this.userService.getHeader()}).subscribe(
       () => {
         console.log("created!")

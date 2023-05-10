@@ -28,8 +28,5 @@ export class DashboardComponent implements OnInit{
     return this.user.username;
   }
 
-  disconnect() {
-    this.userService.disconnect();
-  }
 
 }

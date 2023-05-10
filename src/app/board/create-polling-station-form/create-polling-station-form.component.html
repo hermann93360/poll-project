@@ -22,13 +22,23 @@
               <div class="top">
                 <mat-form-field class="input" appearance="fill">
                   <mat-label>Nom du salon</mat-label>
-                  <input matInput placeholder="Last name, First name" formControlName="name" required>
+                  <input matInput placeholder="Nom du salon" formControlName="name" required>
                 </mat-form-field>
 
                 <mat-form-field class="input" appearance="fill">
                   <mat-label>Catégorie</mat-label>
                   <mat-select formControlName="category">
-                    <mat-option value="etst">test</mat-option>
+                    <mat-option value="animaux">Animaux</mat-option>
+                    <mat-option value="alimentation">Alimentation</mat-option>
+                    <mat-option value="beauté">Beauté</mat-option>
+                    <mat-option value="mode">Mode</mat-option>
+                    <mat-option value="électronique">Électronique</mat-option>
+                    <mat-option value="maison">Maison</mat-option>
+                    <mat-option value="sport">Sport</mat-option>
+                    <mat-option value="voyage">Voyage</mat-option>
+                    <mat-option value="culture">Culture</mat-option>
+                    <mat-option value="automobile">Automobile</mat-option>
+
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -37,13 +47,13 @@
                 <mat-form-field class="example-chip-list input-100" appearance="fill">
                   <mat-label>Mot clés</mat-label>
                   <mat-chip-grid formControlName="keywords" #chipGrid aria-label="Enter fruits">
-                    <mat-chip-row *ngFor="let fruit of keywords"
-                                  (removed)="remove(fruit)"
+                    <mat-chip-row *ngFor="let key of keywords"
+                                  (removed)="remove(key)"
                                   [editable]="true"
-                                  (edited)="edit(fruit, $event)"
-                                  [aria-description]="'press enter to edit ' + fruit.name">
-                      {{fruit.name}}
-                      <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
+                                  (edited)="edit(key, $event)"
+                                  [aria-description]="'press enter to edit ' + key.name">
+                      {{key.name}}
+                      <button matChipRemove [attr.aria-label]="'remove ' + key.name">
                         <mat-icon>cancel</mat-icon>
                       </button>
                     </mat-chip-row>
@@ -59,7 +69,7 @@
               <div class="top">
                 <mat-form-field class="input-100" appearance="fill">
                   <mat-label>Description</mat-label>
-                  <input matInput placeholder="Last name, First name" formControlName="description" required>
+                  <input matInput placeholder="Description" formControlName="description" required>
                 </mat-form-field>
 
               </div>
@@ -81,12 +91,12 @@
               <div class="top check">
 
                 <section class="input">
-                  <label class="example-margin">Type de salon:</label><br>
+                  <label >Type de salon:</label><br>
                   <mat-radio-group formControlName="pollType" color="accent">
-                    <mat-radio-button class="example-margin" value="LIVE">
+                    <mat-radio-button value="LIVE">
                       En direct
                     </mat-radio-button>
-                    <mat-radio-button class="example-margin" value="FREE">
+                    <mat-radio-button value="FREE">
                       Libre
                     </mat-radio-button>
                   </mat-radio-group>
@@ -98,12 +108,12 @@
               <div class="top check">
 
                 <section class="input">
-                  <label class="example-margin">Confidentialité:</label><br>
+                  <label >Confidentialité:</label><br>
                   <mat-radio-group formControlName="scope" color="accent">
-                    <mat-radio-button class="example-margin" value="PUBLIC">
+                    <mat-radio-button  value="PUBLIC">
                       Public
                     </mat-radio-button>
-                    <mat-radio-button class="example-margin" value="PRIVATE">
+                    <mat-radio-button  value="PRIVATE">
                       Privé
                     </mat-radio-button>
                   </mat-radio-group>
@@ -183,7 +193,6 @@
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                     <section class="input-100">
-                      <label class="example-margin">Chpos</label><br>
                       <mat-slider min="0" max="50" step="1" showTickMarks discrete>
                         <input formControlName="userLimit" matSliderThumb>
                       </mat-slider>
@@ -196,15 +205,15 @@
 
               <div class="top">
                 <mat-form-field class="input-100" appearance="fill" *ngIf="displayFieldPrivate()">
-                  <mat-label>Favorite Fruits</mat-label>
+                  <mat-label>Membre à inviter</mat-label>
                   <mat-chip-grid #chipGrid aria-label="Fruit selection">
-                    <mat-chip-row *ngFor="let fruit of fruits" (removed)="removeEmailInvited(fruit)">
+                    <mat-chip-row *ngFor="let fruit of member" (removed)="removeEmailInvited(fruit)">
                       {{fruit}}
                       <button matChipRemove [attr.aria-label]="'remove ' + fruit">
                         <mat-icon>cancel</mat-icon>
                       </button>
                     </mat-chip-row>
-                    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+                    <input placeholder="Email" #fruitInput [formControl]="memberCtrl"
                            [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                            [matChipInputAddOnBlur]="addOnBlur"
@@ -212,7 +221,7 @@
                   </mat-chip-grid>
 
                   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedEmailInvited($event)">
-                    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                    <mat-option *ngFor="let fruit of filteredMembers | async" [value]="fruit">
                       {{fruit}}
                     </mat-option>
                   </mat-autocomplete>
@@ -235,14 +244,13 @@
                   <app-button-dashboard label="Précédent" icon="directions_run">Next</app-button-dashboard>
                 </button>
                 <button class="btn-previous btn-mat" (click)="createPollingStation()"
-                        [disabled]="!createPollingStationForm.finalStep.valid">
+                        [disabled]="disabledbutton()">
                   <app-button-dashboard label="Créer" icon="add_circle">Next</app-button-dashboard>
                 </button>
               </div>
             </form>
           </mat-step>
         </mat-stepper>
-
 
       </form>
 

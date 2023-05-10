@@ -12,7 +12,7 @@ export class CreatePollingStationRequest {
     public scope: string,
     public password: string,
     public pollType: string,
-    public startPoll: Date,
-    public endPoll: Date,
+    public start: Date,
+    public end: Date,
   ) {}
 }

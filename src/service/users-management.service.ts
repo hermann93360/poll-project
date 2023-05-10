@@ -16,10 +16,12 @@ export class UsersManagementService {
   private URL = environment.URL;
   public userDetails: BehaviorSubject<UserDetails> = new BehaviorSubject<UserDetails>(UserDetails.UNKNOW);
   public userError: BehaviorSubject<UserError> = new BehaviorSubject(new UserError());
+  public users: BehaviorSubject<UserDetails[]> = new BehaviorSubject<UserDetails[]>([]);
 
 
   constructor(private http: HttpClient, private router: Router) {
     this.setUserDetails();
+    this.setUsers();
 
   }
 
@@ -89,10 +91,20 @@ export class UsersManagementService {
       }
     )
   }
+  setUsers() {
+    const path = "/users";
+
+    this.http.get<any>(this.URL + path, { headers: this.getHeader() } ).subscribe(
+      (value) => {
+        const users: UserDetails[] = value.users;
+        this.users.next(users);
+      }
+    )
+  }
   connect(token: string) {
     localStorage.setItem('access_token', token);
   }
-  disconnect() {
+  logout() {
     localStorage.removeItem('access_token');
     this.userDetails.next(UserDetails.UNKNOW);
     //TODO don't forgot to deactivate token validation

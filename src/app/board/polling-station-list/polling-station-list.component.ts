@@ -1,22 +1,29 @@
 import {Component, OnInit} from '@angular/core';
 import {PollingStationService} from "../../../service/polling-station.service";
 import {PollingStation} from "../../../model/PollingStation";
+import {advancedFadeAnimation, fadeAnimation, navAnimation, popAnimation} from "../../../animations/animations";
+
 
 @Component({
   selector: 'app-polling-station-list',
   templateUrl: './polling-station-list.component.html',
-  styleUrls: ['./polling-station-list.component.scss']
+  styleUrls: ['./polling-station-list.component.scss'],
+  animations: [
+    navAnimation,
+    popAnimation,
+    advancedFadeAnimation
+  ]
 })
 export class PollingStationListComponent implements OnInit{
 
   public pollingStationList: PollingStation[] = []
-  public displayPollingStationForm: boolean = true;
+  public displayPollingStationForm: boolean = false;
+  public displayNotificationPollingStationCreated: boolean = false
 
   constructor(private pollingStationService: PollingStationService) {
   }
 
   ngOnInit(): void {
-    this.pollingStationService.getAllPollingStation();
     this.pollingStationService.pollingStation.subscribe(
       (value) => {
         this.pollingStationList = value;
@@ -32,5 +39,17 @@ export class PollingStationListComponent implements OnInit{
 
   showPollingStationForm() {
     this.displayPollingStationForm = !this.displayPollingStationForm;
+  }
+
+  hideNotification() {
+    this.displayNotificationPollingStationCreated = false;
+  }
+
+  newPollingStationCreated($event: boolean) {
+    this.displayNotificationPollingStationCreated = true;
+    this.displayPollingStationForm = false;
+    setTimeout(() => {
+      this.displayNotificationPollingStationCreated = false
+    }, 5000)
   }
 }

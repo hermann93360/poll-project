@@ -1,4 +1,4 @@
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {CreatePollingStationRequest} from "../request/CreatePollingStationRequest";
 
 export class CreatePollingStationForm {
@@ -32,7 +32,7 @@ export class CreatePollingStationForm {
     })
 
     this._secondStepForm = this._formBuilder.group({
-      notationVisible: ['', Validators.required],
+      notationVisible: [false, Validators.required],
       scope: ['', Validators.required],
       pollType: ['', Validators.required],
     })
@@ -40,11 +40,13 @@ export class CreatePollingStationForm {
     this._finalStep = this._formBuilder.group({
       startPoll: ['', Validators.required],
       endPoll: ['', Validators.required],
-      password: ['', Validators.required],
-      userLimit: ['', Validators.required],
+      password: [''],
+      userLimit: [''],
       typeNotation: ['', Validators.required],
     })
   }
+
+
 
   constructRequest(): CreatePollingStationRequest {
     const finalStepValues = this.finalStep.value
@@ -58,7 +60,7 @@ export class CreatePollingStationForm {
       firstStepFormValues['keywords'].join('-'),
       finalStepValues['typeNotation'],
       secondStepFormValues['notationVisible'],
-      finalStepValues['userLimit'],
+      this.isPrivate() ?  0 : finalStepValues['userLimit'],
       secondStepFormValues['scope'],
       finalStepValues['password'],
       secondStepFormValues['pollType'],
@@ -67,10 +69,10 @@ export class CreatePollingStationForm {
     )
   }
 
+
   isPrivate() {
     return this.secondStepForm.value['scope'] == "PRIVATE";
   }
-
   get form(): FormGroup {
     return this._form;
   }

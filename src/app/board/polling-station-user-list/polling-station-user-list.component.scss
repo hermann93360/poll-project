@@ -1,0 +1,103 @@
+.list{
+  position: relative;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+
+  .container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+    transform: scale(1);
+
+
+    .header{
+      position: fixed;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      top: -1rem;
+      width: 100%;
+
+      .header-icon{
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+        width: 95%;
+        height: 9rem;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        transition: all 200ms ease-in-out 0s;
+
+        span{
+          font-size: 2rem;
+          color: white;
+        }
+        .line{
+          width: 1px;
+          height: 20px;
+          background-color: #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          opacity: 0.3;
+        }
+
+      }
+      .header-icon:hover{
+        transform: translate(0%, -10%) rotate(0)
+      }
+      h1{
+        font-family: Roboto, serif;
+        font-weight: 700;
+        color: rgb(52, 71, 103);
+        font-size: 1rem;
+      }
+    }
+    .blue-header {
+      background: linear-gradient(195deg, rgb(131, 217, 203), rgb(52, 176, 167));
+    }
+    .purple-header{
+      background: linear-gradient(195deg, rgb(187, 102, 158), rgb(139, 77, 159));
+    }
+    .black-header {
+      background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+    }
+    .body{
+      margin: 8.5rem 20px 10px;
+
+      .top {
+        margin-bottom: 20px;
+        p{
+          font-family: Roboto, serif;
+          color: rgb(123, 128, 154);
+          font-weight: 300;
+          font-size: 0.875rem;
+        }
+      }
+      .bottom{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-family: Roboto, serif;
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        font-size: 1em;
+        color: rgb(123, 128, 154);
+
+        span{
+          font-size: inherit;
+          margin-right: 5px;
+        }
+      }
+
+    }
+  }
+}

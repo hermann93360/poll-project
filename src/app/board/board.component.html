@@ -1,13 +1,33 @@
 <div class="parent">
-  <div class="section nav-section" *ngIf="!isMobile || (displayNav && isMobile)">
-    <app-board-nav (showNav)="showNav($event)"></app-board-nav>
+  <div class="anim" [@nav]="(displayNav && isMobile)" *ngIf="!isMobile || (displayNav && isMobile)">
+    <div class="section nav-section" >
+      <app-board-nav (showNav)="showNav($event)"></app-board-nav>
+    </div>
   </div>
+
   <div class="section dashboard-section">
     <app-header-dash (showNav)="showNav($event)"></app-header-dash>
 
     <div class="element">
       <app-polling-station-list class="pollingStation"></app-polling-station-list>
     </div>
+    <title-component label="Mes salons" size="regular"></title-component>
+    <div class="element polling-stations-user">
+      <app-polling-station-user-list class="card" *ngFor="let ps of pollingStationToUserLogged; let i = index"
+                                     [colorHeader]="colorCard[i]"
+                                     [title]="ps.name"
+                                     [description]="ps.description"
+      ></app-polling-station-user-list>
+
+      <div class="unknow" *ngIf="pollingStationToUserLogged.length == 0 ">
+        <div class="text">
+          <span class="material-symbols-outlined">sentiment_sad</span>
+          <h1>Dommage ! Vous n'avez pas de salons pour le moment</h1>
+        </div>
+        <span>Mais la bonne nouvelle c'est que vous pouvez en créer </span>
+      </div>
+    </div>
+
 
   </div>
 </div>

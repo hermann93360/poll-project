@@ -1,3 +1,11 @@
+
+<div [@fade]='displayNotificationPollingStationCreated? "open" : "closed"' *ngIf="displayNotificationPollingStationCreated">
+  <div class="fade">
+    <app-popup label="Votre salon de vote à bien été créé" icon="house"></app-popup>
+
+  </div>
+</div>
+
 <div class="list">
   <div class="container">
     <div class="header">
@@ -13,11 +21,15 @@
     </div>
 
     <div class="body">
+
       <div class="repeat">
+
         <polling-station-card-component [creator]="pollingStationList[0]?.nameOfAdministrator"
                                         [category]="pollingStationList[0]?.category"
                                         [name]="pollingStationList[0]?.name"
                                         [type]="pollingStationList[0]?.pollType"></polling-station-card-component>
+
+
       </div>
       <div class="repeat" *ngFor="let ps of pollingStationDisplaying()">
         <line-component color="black"></line-component>
@@ -27,7 +39,13 @@
     </div>
 
   </div>
-  <app-create-polling-station-form *ngIf="displayPollingStationForm"></app-create-polling-station-form>
+  <div class="anim" [@pop]='displayPollingStationForm? "open" : "closed"' *ngIf="displayPollingStationForm" >
+    <div class="pop">
+      <app-create-polling-station-form (pollingStationCreated)="newPollingStationCreated($event)"></app-create-polling-station-form>
+    </div>
+
+  </div>
+
 
 </div>
 

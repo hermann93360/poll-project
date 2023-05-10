@@ -9,33 +9,37 @@
     </div>
     <line-component></line-component>
     <div class="body section">
-      <button-nav-component (click)="showBelowNavProfil()" name="Brooklyn Alicia" icon_path="assets/profil.jpeg" type="profil" multiple="true"></button-nav-component>
+      <button-nav-component (click)="showBelowNavProfil()" [name]="nameOfUserLogged" icon_path="assets/profil.jpeg" type="profil" multiple="true"></button-nav-component>
       <div class="buttons-hidden" *ngIf="belowNavyProfile">
-        <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
-        <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
-        <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
+        <button-nav-component name="Profil" icon_path="person" type="below" ></button-nav-component>
+        <button-nav-component name="Paramétrage" icon_path="settings" type="below" ></button-nav-component>
+        <button-nav-component (click)="logout()" name="Déconnexion" icon_path="logout" type="below" ></button-nav-component>
       </div>
     </div>
     <line-component color="white"></line-component>
     <div class="section" >
       <button-nav-component name="Dashboard" icon_path="dashboard" type="nav" ></button-nav-component>
       <h1>Navigation</h1>
+      <button-nav-component (click)="showBelowPollingStation()" name="Mes salons" icon_path="meeting_room" type="nav"></button-nav-component>
+      <button-nav-component (click)="showBelowPollingStation()" name="Mes participations" icon_path="groups" type="nav"></button-nav-component>
+      <button-nav-component (click)="showBelowPollingStation()" name="Mes résultats" icon_path="calculate" type="nav"></button-nav-component>
+      <button-nav-component (click)="showBelowPollingStation()" name="Les salons de vote" icon_path="outdoor_garden" type="nav"></button-nav-component>
+
+      <!--
       <button-nav-component (click)="showBelowPollingStation()" name="Gestion de salon" icon_path="grade" type="nav" multiple="true"></button-nav-component>
       <div class="buttons-hidden" *ngIf="belowNavPollingStation">
         <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
         <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
         <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
       </div>
+      -->
     </div>
     <line-component color="white"></line-component>
     <div class="footer section" >
       <h1>Autres</h1>
-      <button-nav-component (click)="showBelowPollingStation()" name="Gestion de salon" icon_path="grade" type="nav" multiple="true"></button-nav-component>
-      <div class="buttons-hidden" *ngIf="belowNavPollingStation">
-        <button-nav-component name="Brooklyn Alicia" icon_path="grade" type="below" ></button-nav-component>
-        <button-nav-component name="Brooklyn Alicia" icon_path="dashboard" type="below" ></button-nav-component>
-        <button-nav-component name="Brooklyn Alicia" icon_path="browse_activity" type="below" ></button-nav-component>
-      </div>
+      <button-nav-component (click)="showBelowPollingStation()" name="Contact" icon_path="contact_page" type="nav"></button-nav-component>
+      <button-nav-component (click)="showBelowPollingStation()" name="Nous évaluer" icon_path="edit_square" type="nav"></button-nav-component>
+
     </div>
   </div>
 </nav>
