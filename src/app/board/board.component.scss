@@ -183,7 +183,7 @@
 
       }
       .element > * {
-        width: 100%;
+        width: 100% !important;
       }
       .polling-stations-user{
         .unknow{
@@ -192,12 +192,11 @@
             text-align: center;
           }
         }
+        .card{
+          width: 100% !important;
+        }
       }
 
-      .polling-stations-user > * {
-        width: 100% !important;
-
-      }
     }
 
   }

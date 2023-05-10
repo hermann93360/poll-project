@@ -21,8 +21,13 @@ export class BoardNavComponent {
   }
 
   logout() {
-    this.router.navigate(['/'])
+    this.reloadPage()
     this.userService.logout();
+  }
+
+  reloadPage() {
+    this.router.navigate(['/'])
+    window.location.reload();
   }
   getNameOfUserLogged() {
     this.userService.getUser().subscribe(
