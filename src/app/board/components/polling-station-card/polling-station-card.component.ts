@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'polling-station-card-component',
@@ -15,6 +16,18 @@ export class PollingStationCardComponent {
   public type: string | undefined = "";
   @Input()
   public category: string | undefined = "";
+  @Input()
+  public pollingStationId: string | undefined = "";
 
+  constructor(private router: Router) {
+  }
 
+  redirectToStation() {
+    console.log(this.pollingStationId)
+    this.router.navigate(['/station', this.pollingStationId])
+  }
+
+  joinRoom() {
+
+  }
 }

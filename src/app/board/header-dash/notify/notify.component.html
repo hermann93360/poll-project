@@ -1,0 +1,23 @@
+<div class="icons-top">
+  <span class="material-symbols-sharp">account_circle</span>
+  <span class="material-symbols-sharp">settings</span>
+  <div class="notify" >
+    <span class="material-symbols-sharp" (click)="showNotification()">notifications</span>
+    <div class="pop" *ngIf="demandNotifications.length > 0">
+      <p>{{demandNotifications.length}}</p>
+    </div>
+
+    <div class="notifications" *ngIf="displayNotifications">
+      <app-card-notification *ngFor="let demand of demandNotifications"
+                             [namePollingStation]="demand.namePollingStation"
+                             [nameUserRequesting]="demand.nameRequestUser"
+                             [demandId]="demand.demandId"
+                             (removeNotify)="removeNotify($event)"
+      ></app-card-notification>
+      <div class="no-notification" *ngIf="demandNotifications.length == 0">
+        <title-component label="Pas de notifications pour le moment" size="small"></title-component>
+        <p>Mais t'inquiète, ça va venir</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@
   padding-left: 30px;
   padding-bottom: 10px;
   padding-top: 10px;
+  cursor: pointer;
   .container {
     display: flex;
     align-items: center;
@@ -81,6 +82,10 @@
       }
     }
   }
+}
+.card:hover{
+  background-color: rgba(159, 159, 159, 0.1);
+  color: white;
 }
 @media (max-width: 1024px) {
   .card{

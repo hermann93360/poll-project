@@ -26,7 +26,7 @@ export class PollingStationListComponent implements OnInit{
   ngOnInit(): void {
     this.pollingStationService.pollingStation.subscribe(
       (value) => {
-        this.pollingStationList = value;
+        this.pollingStationList = value.slice(value.length - 3, value.length);
         console.log(this.pollingStationList)
       }
     )
@@ -47,9 +47,9 @@ export class PollingStationListComponent implements OnInit{
 
   newPollingStationCreated($event: boolean) {
     this.displayNotificationPollingStationCreated = true;
-    this.displayPollingStationForm = false;
     setTimeout(() => {
       this.displayNotificationPollingStationCreated = false
-    }, 5000)
+      this.displayPollingStationForm = !this.displayPollingStationForm;
+    }, 1500)
   }
 }

@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="container" *ngIf="displayMainContent" (click)="show()">
+    <div class="top">
+      <div class="profile">
+        <img src="../../../../../assets/profil.jpeg" alt="profil" />
+      </div>
+
+      <div class="informations">
+        <p>{{nameUserRequesting}} vous solicite à rejoindre le salon de vote : {{namePollingStation}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container-response" *ngIf="!displayMainContent">
+    <div class="btns">
+      <span class="material-symbols-outlined accept" (click)="accept()">done</span>
+      <span class="material-symbols-outlined reject" (click)="reject()" >delete</span>
+      <span class="material-symbols-outlined back" (click)="show()">arrow_back</span>
+    </div>
+
+
+  </div>
+  <p class="litle">Appuyer sur la notification pour répondre</p>
+
+
+
+
+</div>

@@ -18,6 +18,8 @@ export class BoardNavComponent {
     this.belowNavyProfile = false;
     this.belowNavPollingStation = false;
     this.getNameOfUserLogged();
+    userService.setUserDetails();
+    userService.setUsers();
   }
 
   logout() {

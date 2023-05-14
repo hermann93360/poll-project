@@ -1,0 +1,36 @@
+<div class="content">
+  <div class="container" (click)="showyAddUserForm()">
+    <span class="material-symbols-sharp">person_add</span>
+  </div>
+
+  <div class="add_user" *ngIf="displayAddUserForm">
+    <mat-form-field class="input-100" appearance="fill" >
+      <mat-label>Membre à inviter</mat-label>
+      <mat-chip-grid  #chipGrid aria-label="Fruit selection">
+        <mat-chip-row *ngFor="let fruit of member" (removed)="removeEmailInvited(fruit)">
+          {{fruit}}
+          <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="Email" #fruitInput [formControl]="memberCtrl"
+               [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="addEmailInvited($event)"/>
+      </mat-chip-grid>
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedEmailInvited($event)">
+        <mat-option *ngFor="let fruit of filteredMembers | async" [value]="fruit">
+          {{fruit}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <button class="btn-validate" (click)="addUser(chipGrid.value)">
+      <span class="material-symbols-sharp">check</span>
+    </button>
+
+  </div>
+
+</div>

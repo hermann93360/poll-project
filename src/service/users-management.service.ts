@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {environment} from "../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CreateUserRequest} from "../model/request/CreateUserRequest";
@@ -11,17 +11,21 @@ import {Error, UserError} from "../model/Error";
 @Injectable({
   providedIn: 'root'
 })
-export class UsersManagementService {
+export class UsersManagementService implements OnInit {
 
-  private URL = environment.URL;
+  private URL = environment.URL + "/v1/api";
   public userDetails: BehaviorSubject<UserDetails> = new BehaviorSubject<UserDetails>(UserDetails.UNKNOW);
+  public userDetailsVar: UserDetails = UserDetails.UNKNOW;
   public userError: BehaviorSubject<UserError> = new BehaviorSubject(new UserError());
   public users: BehaviorSubject<UserDetails[]> = new BehaviorSubject<UserDetails[]>([]);
+  public accessToken: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
 
   constructor(private http: HttpClient, private router: Router) {
-    this.setUserDetails();
-    this.setUsers();
+
+  }
+
+  ngOnInit(): void {
 
   }
 
@@ -38,7 +42,7 @@ export class UsersManagementService {
 
         const request = new LoginRequest(
           createUserRequest.email,
-         createUserRequest.password
+          createUserRequest.password
         )
 
         console.log("created!");
@@ -46,10 +50,10 @@ export class UsersManagementService {
       },
       (error) => {
 
-        if(error.error.message == "This mail is already used") {
+        if (error.error.message == "This mail is already used") {
           this.userError.value.setCurrentError(Error.EMAIL_ERROR);
           this.userError.next(this.userError.value);
-        }else{
+        } else {
           this.userError.value.setCurrentError(Error.UNKNOW_ERROR);
           this.userError.next(this.userError.value);
         }
@@ -80,37 +84,45 @@ export class UsersManagementService {
       }
     );
   }
+
   setUserDetails() {
     const path = "/user/details";
 
-    this.http.get<UserDetails>(this.URL + path, { headers: this.getHeader() } ).subscribe(
+    this.http.get<UserDetails>(this.URL + path, {headers: this.getHeader()}).subscribe(
       (value) => {
-        const userDetail : UserDetails = {...value};
+        const userDetail: UserDetails = {...value};
+        this.userDetailsVar = userDetail;
         this.userDetails.next(userDetail);
         console.log(this.userDetails)
       }
     )
   }
+
   setUsers() {
     const path = "/users";
 
-    this.http.get<any>(this.URL + path, { headers: this.getHeader() } ).subscribe(
+    this.http.get<any>(this.URL + path, {headers: this.getHeader()}).subscribe(
       (value) => {
         const users: UserDetails[] = value.users;
         this.users.next(users);
       }
     )
   }
+
   connect(token: string) {
     localStorage.setItem('access_token', token);
+    this.accessToken.next(token);
+    this.setUserDetails()
+    this.setUsers()
   }
+
   logout() {
     localStorage.removeItem('access_token');
     this.userDetails.next(UserDetails.UNKNOW);
     //TODO don't forgot to deactivate token validation
   }
 
-  getUser(){
+  getUser() {
     return this.userDetails.asObservable();
   }
 

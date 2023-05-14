@@ -17,6 +17,7 @@
                                      [colorHeader]="colorCard[i]"
                                      [title]="ps.name"
                                      [description]="ps.description"
+                                     [pollingStationId]="ps.pollingStationId"
       ></app-polling-station-user-list>
 
       <div class="unknow" *ngIf="pollingStationToUserLogged.length == 0 ">
@@ -31,3 +32,8 @@
 
   </div>
 </div>
+
+<div class="station">
+</div>
+
+

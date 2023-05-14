@@ -42,6 +42,14 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { PollingStationUserListComponent } from './board/polling-station-user-list/polling-station-user-list.component';
 import { BarChartComponent } from './board/components/bar-chart/bar-chart.component';
 import { PopupComponent } from './board/components/popup/popup.component';
+import { StationComponent } from './station/station.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { CardComponent } from './station/card/card.component';
+import { CreateSubjectFormComponent } from './station/create-subject-form/create-subject-form.component';
+import { ButtonStationComponent } from './station/button-station/button-station.component';
+import { AddUserBtnComponent } from './station/add-user-btn/add-user-btn.component';
+import { NotifyComponent } from './board/header-dash/notify/notify.component';
+import { CardNotificationComponent } from './board/header-dash/notify/card-notification/card-notification.component';
 
 const appRoutes: Routes = [
   {
@@ -56,7 +64,8 @@ const appRoutes: Routes = [
       },
     ]
   },
-  {path: 'dashboard', component: BoardComponent, canActivate: [AuthGuardService]},
+  {path: 'dashboard', component: BoardComponent, canActivate: [AuthGuardService], data: {animations: 'dashboard'}},
+  {path: 'station/:id', component: StationComponent, canActivate: [AuthGuardService], data: {animations: 'station'}},
   {path: '', component: HomeComponent},
 ];
 
@@ -81,6 +90,13 @@ const appRoutes: Routes = [
     PollingStationUserListComponent,
     BarChartComponent,
     PopupComponent,
+    StationComponent,
+    CardComponent,
+    CreateSubjectFormComponent,
+    ButtonStationComponent,
+    AddUserBtnComponent,
+    NotifyComponent,
+    CardNotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +119,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatAutocompleteModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
 
   ],
   exports: [

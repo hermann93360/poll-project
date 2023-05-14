@@ -1,0 +1,22 @@
+<div class="station">
+  <form [formGroup]="createSubjectForm.form">
+    <title-component class="title" label="Ajouter un sujet" size="regular"></title-component>
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom du sujet</mat-label>
+      <input  matInput placeholder="Ex. Pizza" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <input  matInput placeholder="Ex. Pizza" formControlName="description">
+    </mat-form-field>
+
+
+    <app-button-dashboard (click)="createSubject()" label="Valider" icon="check_circle"></app-button-dashboard>
+    <p>
+      our réduire l'opacité d'une bordure en CSS, vous pouvez utiliser la é d'une bordure en CSS, vous pouvez utiliser la st l'alpha, qui est l'opacité de la couleur.
+    </p>
+
+  </form>
+
+</div>

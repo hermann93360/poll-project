@@ -1,0 +1,63 @@
+.icons-top {
+  position: relative;
+  display: flex;
+  color: rgb(123, 128, 154);
+  width: 100px;
+  justify-content: space-between;
+
+  span {
+    font-size: 1.4em;
+    cursor: pointer;
+  }
+
+  .notify{
+    position: relative;
+    .pop{
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(195deg, rgb(239, 83, 80), rgb(229, 57, 53));
+      color: white;
+      width: 17px;
+      height: 17px;
+      font-family: Roboto;
+      border-radius: 50%;
+      font-size: 0.9em;
+      display: flex;
+      font-weight: 700;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+    }
+    .notifications{
+
+      top: 30px;
+      right: 0;
+      position: absolute;
+      width: 300px;
+      background-color: white;
+      z-index: 3;
+      box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 10px;
+
+      .no-notification{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p{
+          font-weight: 300;
+          color: rgb(52, 71, 103);
+          font-size: 0.9em;
+        }
+      }
+
+
+
+
+    }
+  }
+
+}

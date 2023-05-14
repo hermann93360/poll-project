@@ -67,18 +67,17 @@ export const routeAuthHouseAnimamtion = trigger('routeAnimations', [
 
 
 export const routeAnimationFade = trigger('routeAnimationsFade', [
-  transition('access => configure, * <=> *', [
+  transition('* <=> *', [
     query(':enter',
       [
         style({ opacity: 0 })
       ],
-      { optional: true }
     ),
 
     query(':leave',
       [
         style({ position: 'absolute', opacity: 1, width: '100%'}),
-        animate('.1s', style({ opacity: 0 }))
+        animate('5s', style({ opacity: 0 }))
       ],
       { optional: true }
     ),
@@ -237,6 +236,7 @@ export const windowAnimation = trigger('windowAnimation', [
   transition(':enter', [
     group([
       sequence([
+
         query(".container-course",[
           style({
             height: 0,
@@ -304,7 +304,7 @@ export const popAnimation = trigger('pop', [
 export const navBoardAnimation = trigger('nav', [
   transition(':enter', [
     group([
-      query(".nav-section",[
+      query(".nav-section", [
         style({
           transform: 'translateX(-100%)',
           opacity: 0,
@@ -315,7 +315,8 @@ export const navBoardAnimation = trigger('nav', [
           transform: 'translateX(0)'
 
         })),
-      ])
+      ],
+        { optional: true })
     ])
 
   ]),
@@ -354,3 +355,54 @@ export const advancedFadeAnimation = trigger('fade', [
   ])
 
 ])
+
+export const slideInAnimation =
+  trigger('routeAnimations', [
+
+    transition('dashboard => station', [
+      query(':enter .parent, :enter .bg', [
+        style({
+          position: 'absolute',
+          top: 0,
+          left: '200%',
+          width: '100%'
+        })
+      ]),
+      query(':leave .parent, .nav-section', [
+        style({ left: '0' })
+      ]),
+      query(':leave .parent, .nav-section', animateChild()),
+      group([
+        query(':leave .parent, .nav-section', [
+          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '-100%', opacity: 0 }))
+        ]),
+        query(':enter .parent, :enter .bg', [
+          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '0%' }))
+        ]),
+        query('@*', animateChild(), { optional: true })
+      ]),
+    ]),
+
+    transition('station => dashboard', [
+      query(':enter .parent, .nav-section', [
+        style({
+          position: 'fixed',
+          top: 0,
+          left: '-100%',
+        })
+      ]),
+      query(':leave .parent, :leave .bg', [
+        style({ left: '0' })
+      ]),
+      query(':leave', animateChild()),
+      group([
+        query(':leave .parent, :leave .bg', [
+          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '200%', opacity: 0 }))
+        ]),
+        query(':enter .parent, .nav-section', [
+          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '0%' }))
+        ]),
+        query('@*', animateChild(), { optional: true })
+      ]),
+    ])
+  ]);

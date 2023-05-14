@@ -1,0 +1,128 @@
+.card{
+  border-radius: 7px;
+  padding: 3px;
+  cursor: pointer;
+  .container{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+  }
+  .top{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+
+
+    .profile{
+      position: relative;
+      display: flex;
+      -moz-box-align: center;
+      justify-content: center;
+      align-items: flex-start;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      line-height: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+      background: transparent;
+      color: rgb(255, 255, 255);
+      font-weight: 400;
+      width: 2rem;
+      height: 2rem;
+      font-size: 0.875rem;
+      margin-right: 10px;
+
+      img{
+        width: 100%;
+        text-align: center;
+        object-fit: cover;
+        color: transparent;
+        text-indent: 10000px;
+        height: auto;
+      }
+    }
+    .informations{
+
+      font-size: 0.9em;
+      width: 90%;
+      max-width: 234px;
+      font-family: Roboto, serif;
+      font-weight: 500;
+
+      .name{
+        display: inline-block;
+        width: 50px;
+
+      }
+
+      p{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 36px;
+      }
+
+    }
+  }
+  .bottom{
+
+  }
+
+}
+.card:hover{
+  background-color: rgba(204, 204, 204, 0.2);
+}
+
+.container-response{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 40px;
+
+
+  .btns{
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+  }
+  span{
+    padding: 5px;
+    border-radius: 50%;
+  }
+
+  .accept{
+    background-color: rgba(51, 149, 55, 0.5);
+  }
+  .accept:hover{
+    background-color: rgb(51, 149, 55);
+
+  }
+  .reject{
+    background-color: rgba(196, 78, 76, 0.5);
+  }
+  .reject:hover{
+    background-color: rgb(196, 78, 76);
+
+
+  }
+  .back{
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+  .back:hover{
+    background-color: rgb(0, 0, 0);
+
+
+  }
+
+}
+.litle{
+  font-size: 0.8em;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: rgba(123, 128, 154, 0.6);
+  font-weight: 300;
+
+}

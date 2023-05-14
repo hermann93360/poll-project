@@ -8,11 +8,6 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
 import {UsersManagementService} from "../../../service/users-management.service";
 
-interface Pokemon {
-  value: string;
-  viewValue: string;
-}
-
 export interface Keyword {
   name: string;
 }

@@ -1,0 +1,17 @@
+.content{
+width: 100%;
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6c1368;
+    color: white;
+    font-family: Roboto;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 10px;
+    span{
+      margin-right: 10px;
+    }
+  }
+}

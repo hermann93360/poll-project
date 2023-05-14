@@ -1,0 +1,134 @@
+<div class="bg"></div>
+<div class="bubbles">
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+</div>
+<div class="parent">
+
+  <div class="container">
+
+
+    <div class="header">
+      <div class="icon">
+        <img src="assets/logo.png"/>
+      </div>
+      <div class="members">
+        <div class="case-container">
+          <div class="case" *ngFor="let user of pollingStation.users">
+            <div class="icon">
+              <img src="assets/profil.jpeg" alt="profile">
+            </div>
+          </div>
+        </div>
+
+        <h2> + {{pollingStation.users.length}}</h2>
+
+      </div>
+      <app-add-user-btn [pollingStationId]="pollingStation.pollingStationId" *ngIf="isAdministrator"></app-add-user-btn>
+
+      <div class="play" *ngIf="isAdministrator">
+        <div class="buttons">
+          <span class="material-symbols-sharp play_arrow">play_arrow</span>
+          <div class="vertical-line">
+          </div>
+          <span class="material-symbols-sharp pause">pause</span>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="introduce">
+      <div class="big_title">
+        <h1>{{pollingStation?.name}}</h1>
+      </div>
+      <div class="description">
+        <p>{{pollingStation?.description}}</p>
+      </div>
+    </div>
+
+
+    <div class="body">
+      <div class="card">
+        <div class="directive left" (click)="previousSubject()">
+          <span class="material-symbols-outlined">arrow_back_ios</span>
+        </div>
+        <div class="container-card">
+          <app-card *ngFor="let ps of subjectsToDisplay"
+                    [name]="ps.name"
+                    [description]="ps.description"></app-card>
+
+          <div class="empty-subjects" *ngIf="pollingStation?.subjects?.length == 0">
+            <title-component label="Vous n'avez pas de sujets à voter dans votre salon"
+                             size="regular"></title-component>
+            <p>Mais la bonne nouvelle c'est que vous pouvez en ajouter juste à droite</p>
+          </div>
+        </div>
+        <div class="directive right" (click)="nextSubjects()">
+          <span class="material-symbols-outlined">arrow_forward_ios</span>
+        </div>
+
+
+        <app-create-subject-form *ngIf="isAdministrator" [pollingStationId]="pollingStationId" class="form"></app-create-subject-form>
+      </div>
+
+
+    </div>
+    <!--
+    <mat-progress-spinner
+      class="example-margin"
+      [color]="'accent'"
+      [mode]="'indeterminate'"
+      [value]="50">
+    </mat-progress-spinner>
+    -->
+  </div>
+</div>

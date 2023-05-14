@@ -95,6 +95,17 @@ body{
 .check .mdc-form-field {
   width: 120px;
 }
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: #fff !important;
+}
+
+.station .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  backdrop-filter: blur(10px);
+}
+.station .mat-mdc-text-field-wrapper {
+  background-color: transparent !important;
+}
+
 //font
 
 @font-face {

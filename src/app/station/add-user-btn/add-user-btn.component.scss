@@ -1,0 +1,59 @@
+.content{
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container{
+    cursor: pointer;
+    background-color: rgb(240, 242, 245);
+    border-radius: 50%;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.68);
+    margin-right: 15px;
+  }
+
+  .add_user{
+
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    /* Déplacez la div de moitié vers le haut et la gauche en utilisant des valeurs négatives de la moitié de ses dimensions */
+    transform: translate(-50%, 0%);
+    /* Ajoutez les dimensions souhaitées */
+    width: 500px;
+    display: flex;
+    align-items: flex-start;
+
+    .btn-validate {
+      position: absolute;
+     background-color: #6c1368;
+      padding: 5px;
+      color: white;
+      border: #6c1368;
+      height: 30px;
+      width: 30px;
+      right: 0px;
+      top: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+    }
+    .btn-validate:hover{
+      background-color: #570d54;
+    }
+
+
+    .input-100{
+      width: 100%;
+    }
+  }
+
+}

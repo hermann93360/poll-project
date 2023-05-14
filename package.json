@@ -23,6 +23,9 @@
     "chart.js": "^4.3.0",
     "rxjs": "~7.8.0",
     "service-worker": "^0.0.0",
+    "socket.io": "^4.6.1",
+    "sockjs": "^0.3.24",
+    "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

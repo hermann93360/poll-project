@@ -1,5 +1,5 @@
-
-<div [@fade]='displayNotificationPollingStationCreated? "open" : "closed"' *ngIf="displayNotificationPollingStationCreated">
+<div [@fade]='displayNotificationPollingStationCreated? "open" : "closed"'
+     *ngIf="displayNotificationPollingStationCreated">
   <div class="fade">
     <app-popup label="Votre salon de vote à bien été créé" icon="house"></app-popup>
 
@@ -16,8 +16,10 @@
     </div>
 
     <div class="add-btn">
-      <app-button-dashboard (click)="showPollingStationForm()" icon="library_add" label="Créer un salon"></app-button-dashboard>
-      <app-button-dashboard class="join-polling" icon="groups_3" label="Rejoindre un salon"></app-button-dashboard>
+      <app-button-dashboard (click)="showPollingStationForm()" icon="library_add"
+                            label="Créer un salon"></app-button-dashboard>
+      <app-button-dashboard class="join-polling" icon="groups_3" label="Rejoindre un salon"
+                            [routerLink]="['/station']"></app-button-dashboard>
     </div>
 
     <div class="body">
@@ -27,21 +29,23 @@
         <polling-station-card-component [creator]="pollingStationList[0]?.nameOfAdministrator"
                                         [category]="pollingStationList[0]?.category"
                                         [name]="pollingStationList[0]?.name"
-                                        [type]="pollingStationList[0]?.pollType"></polling-station-card-component>
+                                        [type]="pollingStationList[0]?.pollType"
+                                        [pollingStationId]="pollingStationList[0]?.pollingStationId"></polling-station-card-component>
 
 
       </div>
       <div class="repeat" *ngFor="let ps of pollingStationDisplaying()">
         <line-component color="black"></line-component>
         <polling-station-card-component [creator]="ps.nameOfAdministrator" [category]="ps.category" [name]="ps.name"
-                                        [type]="ps.pollType"></polling-station-card-component>
+                                        [type]="ps.pollType" [pollingStationId]="ps.pollingStationId"></polling-station-card-component>
       </div>
     </div>
 
   </div>
-  <div class="anim" [@pop]='displayPollingStationForm? "open" : "closed"' *ngIf="displayPollingStationForm" >
+  <div class="anim" [@pop]='displayPollingStationForm? "open" : "closed"' *ngIf="displayPollingStationForm">
     <div class="pop">
-      <app-create-polling-station-form (pollingStationCreated)="newPollingStationCreated($event)"></app-create-polling-station-form>
+      <app-create-polling-station-form
+        (pollingStationCreated)="newPollingStationCreated($event)"></app-create-polling-station-form>
     </div>
 
   </div>
