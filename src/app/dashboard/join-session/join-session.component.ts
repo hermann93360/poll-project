@@ -71,7 +71,7 @@ export class JoinSessionComponent implements OnInit{
       this.sessionService.getSession(this.code, request).subscribe(
         (value) => {
           this.sessionService.currentSession.next(value);
-          this.router.navigate(['/session/grade/'+this.code]);
+          this.router.navigate(['/grade/'+this.code]);
         },
         error =>{
           console.log(error.error.message)
