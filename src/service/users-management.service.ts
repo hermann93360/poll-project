@@ -22,7 +22,7 @@ export class UsersManagementService implements OnInit {
 
 
   constructor(private http: HttpClient, private router: Router) {
-
+    this.login(new LoginRequest("test@gmail.com", "testP0143"))
   }
 
   ngOnInit(): void {
@@ -72,7 +72,6 @@ export class UsersManagementService implements OnInit {
         const token = value.access_token;
         this.connect(token);
         this.setUserDetails();
-        this.router.navigate(['/dashboard'])
       },
       (error) => {
         console.log(error)

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {ChildrenOutletContexts, RouterOutlet} from "@angular/router";
 import {routeAnimationFade, slideInAnimation} from "../animations/animations";
+import {SessionService} from "../service/session.service";
+import {UsersManagementService} from "../service/users-management.service";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import {routeAnimationFade, slideInAnimation} from "../animations/animations";
 export class AppComponent {
   title = 'poll-project';
 
-  constructor(private contexts: ChildrenOutletContexts) {
+  constructor(private contexts: ChildrenOutletContexts, private authService: UsersManagementService) {
   }
   prepareRoute(outlet: RouterOutlet) {
     //@ts-ignore
