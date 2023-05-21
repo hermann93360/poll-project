@@ -333,9 +333,9 @@ export const navBoardAnimation = trigger('nav', [
 
 
 export const advancedFadeAnimation = trigger('fade', [
-  transition(':enter', [
+  transition('* => *', [
     group([
-      query(".fade",[
+      query(":enter .fade",[
         style({
           opacity: 0,
         }),
@@ -346,8 +346,8 @@ export const advancedFadeAnimation = trigger('fade', [
     ])
 
   ]),
-  transition(':leave', [
-    query(".fade",[
+  transition('* => *', [
+    query(":leave .fade",[
       animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({
         opacity: 0
       })),
@@ -359,50 +359,17 @@ export const advancedFadeAnimation = trigger('fade', [
 export const slideInAnimation =
   trigger('routeAnimations', [
 
-    transition('dashboard => station', [
-      query(':enter .parent, :enter .bg', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: '200%',
-          width: '100%'
-        })
-      ]),
-      query(':leave .parent, .nav-section', [
-        style({ left: '0' })
-      ]),
-      query(':leave .parent, .nav-section', animateChild()),
-      group([
-        query(':leave .parent, .nav-section', [
-          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '-100%', opacity: 0 }))
-        ]),
-        query(':enter .parent, :enter .bg', [
-          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '0%' }))
-        ]),
-        query('@*', animateChild(), { optional: true })
+    transition('* => *', [
+
+      sequence([
+        query(':enter .container',  [
+          style({
+            opacity: 0
+          }),
+          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ opacity: 1 }))
+        ], { optional: true }),
+
+
       ]),
     ]),
-
-    transition('station => dashboard', [
-      query(':enter .parent, .nav-section', [
-        style({
-          position: 'fixed',
-          top: 0,
-          left: '-100%',
-        })
-      ]),
-      query(':leave .parent, :leave .bg', [
-        style({ left: '0' })
-      ]),
-      query(':leave', animateChild()),
-      group([
-        query(':leave .parent, :leave .bg', [
-          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '200%', opacity: 0 }))
-        ]),
-        query(':enter .parent, .nav-section', [
-          animate('450ms cubic-bezier(.74,-0.78,.45,.93)', style({ left: '0%' }))
-        ]),
-        query('@*', animateChild(), { optional: true })
-      ]),
-    ])
   ]);

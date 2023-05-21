@@ -2,11 +2,13 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
-import {CreatePollingStationForm} from "../../../model/form/CreatePollingStationForm";
+import {CreateSessionForm} from "../../../model/form/CreateSessionForm";
 import {PollingStationService} from "../../../service/polling-station.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
 import {UsersManagementService} from "../../../service/users-management.service";
+import {ManagePersonRequest} from "../../../model/request/up/ManagePersonRequest";
+import {SessionService} from "../../../service/session.service";
 
 export interface Keyword {
   name: string;
@@ -21,19 +23,19 @@ export class CreatePollingStationFormComponent implements OnInit{
 
   @Output() pollingStationCreated = new EventEmitter<boolean>();
   today = new Date();
-  pokemonControl = new FormControl('');
+  public numberOfGroups = 2;
+  public groupsFirst: ManagePersonRequest[] = [];
 
-  hide = true;
+  public createdSession = false;
+  public codeSesion = "";
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   keywords: Keyword[] = [];
-  panelOpenState = false;
+  public createPollingStationForm: CreateSessionForm;
 
-  public createPollingStationForm: CreatePollingStationForm;
-
-  constructor(private _formBuilder: FormBuilder, private pollingStationService: PollingStationService, private usersService: UsersManagementService) {
-    this.createPollingStationForm = new CreatePollingStationForm(_formBuilder);
+  constructor(private _formBuilder: FormBuilder, private pollingStationService: PollingStationService, private sessionService: SessionService, private usersService: UsersManagementService) {
+    this.createPollingStationForm = new CreateSessionForm(_formBuilder);
     this.filteredMembers = this.memberCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allMembers.slice())),
@@ -82,11 +84,7 @@ export class CreatePollingStationFormComponent implements OnInit{
       (this.createPollingStationForm.isPrivate() && this.createPollingStationForm.secondStepForm.value['password']?.length == 0) ||
       (!this.createPollingStationForm.isPrivate() && this.createPollingStationForm.secondStepForm?.value['userLimit'] == 0);
   }
-  createPollingStation() {
-    const createPollingStationRequest = this.createPollingStationForm.constructRequest();
-    this.pollingStationService.createPollingStation(createPollingStationRequest)
-    this.pollingStationCreated.emit(true);
-  }
+
 
   displayFieldPrivate() {
     return this.createPollingStationForm.isPrivate();
@@ -152,5 +150,30 @@ export class CreatePollingStationFormComponent implements OnInit{
     console.log(this.createPollingStationForm.secondStepForm.value)
     console.log(this.createPollingStationForm.finalStep.value)
     console.log(this.createPollingStationForm.constructRequest())
+  }
+
+  createSession() {
+    if(this.groupsFirst.length == this.numberOfGroups){
+      const createSessionRequest = this.createPollingStationForm.constructRequest();
+      this.sessionService.createSession(createSessionRequest).subscribe(
+        session => {
+          console.log(session.sessionId)
+          this.codeSesion = session.sessionId.substring(0, 7);
+          this.groupsFirst.forEach(firstPerson => {
+            this.sessionService.addGroup(session.sessionId, firstPerson).subscribe(
+              data => {
+                console.log("session created !")
+              }
+            )
+          })
+        }
+      )
+    }
+
+  }
+
+  configureGroupList(event: ManagePersonRequest[]) {
+    this.groupsFirst = event;
+    console.log(this.groupsFirst);
   }
 }

@@ -1,0 +1,32 @@
+<div class="container join">
+
+  <title-component label="Entrer le code de la session" size="regular"></title-component>
+
+  <input (keyup)="submitCode(code.value)" #code class="start" maxlength='7' placeholder='RD45S8F'/>
+
+</div>
+<div class="bg" *ngIf="setup && path == 'grade'" >
+  <div class="back">
+    <span class="material-symbols-outlined" [routerLink]="['/session']">arrow_back_ios</span>
+  </div>
+  <div class="content" *ngIf="path == 'grade'">
+    <div class="input">
+      <input #name type="text" placeholder="Nom"/>
+      <input #email (keyup)="gradeSession(name.value, email.value)" type="text" placeholder="Email"/>
+      <div class="error" *ngIf="errorIndex == 2">
+        <h2>{{error[errorIndex]}}</h2>
+      </div>
+
+    </div>
+    <p>Vous serez automatiquement connecte lorsque nous aurons reconnu votre email</p>
+
+  </div>
+
+</div>
+<div class="error" *ngIf="errorIndex != -1">
+  <h2>{{error[errorIndex]}}</h2>
+</div>
+
+
+
+

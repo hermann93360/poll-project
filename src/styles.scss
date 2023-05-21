@@ -96,7 +96,7 @@ body{
   width: 120px;
 }
 .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: #fff !important;
+  stroke: #ba47e3 !important;
 }
 
 .station .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -139,6 +139,35 @@ body{
   font-family: "rockstar";
   src: url('assets/fonts/rockstar.otf');
 }
+@font-face {
+  font-family: "proximal";
+  src: url('assets/fonts/proximaBold.otf');
+}@font-face {
+  font-family: "proximalLight";
+  src: url('assets/fonts/pL.otf');
+}
+.join {
+  .mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c21-1.mdc-text-field--filled {
+    background: transparent !important;
+  }
+  .mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c21-2.mdc-text-field--filled {
+    background: transparent !important;
+  }
+  .ng-tns-c21-1 {
+    font-family: proximal;
+    font-weight: 700;
+  }
+  .ng-tns-c21-2 {
+    font-family: proximal;
+    font-weight: 700;
+  }
+}
+.input-right{
+  .mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c21-1.mdc-text-field--filled {
+    background: transparent !important;
+  }
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

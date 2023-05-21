@@ -1,0 +1,72 @@
+<div class="content" *ngIf="loaded">
+  <div class="container" *ngIf="!isConfigured && !notExist">
+    <div class="header">
+      <span class="material-symbols-sharp">settings</span>
+      <h2> Configurer votre groupe</h2>
+    </div>
+
+    <div class="body" >
+
+      <mat-form-field appearance="fill" class="input-right">
+        <mat-label>Nom de votre groupe</mat-label>
+        <input #nameOfGroup matInput placeholder="Nom du groupe" required>
+      </mat-form-field>
+
+      <div class="input">
+        <title-component class="title" label="Ajouter des membres" size="small"></title-component>
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input #name matInput placeholder="Nom du membre à ajouter" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Emails</mat-label>
+          <input #email matInput placeholder="Email du membre à ajouter" required>
+        </mat-form-field>
+        <div class="button">
+
+          <app-button-dashboard color="black" label="Ajouter" icon="add_circle" (click)="add(name.value, email.value)"></app-button-dashboard>
+        </div>
+
+      </div>
+
+      <title-component class="title" label="Les membres de mon groupes :" size="small"></title-component>
+
+      <div class="member">
+        <div class="card" *ngFor="let member of personInGroup">
+          <div class="remove">
+            <span class="material-symbols-sharp" (click)="remove(member.email)">close</span>
+          </div>
+          <div class="label">
+            <h3>{{member.name}}</h3>
+            <p>{{member.email}}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="button-submit">
+
+        <app-button-dashboard color="black" label="Configurer" icon="check" (click)="updateGroup()"></app-button-dashboard>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="error" *ngIf="notExist">
+    <title-component label="Nous n'avons pas trouvé votre groupe" size="big"></title-component>
+    <p>Il se peut que votre groupe n'existe pas veillez contacter l'administrateur de la session</p>
+  </div>
+
+  <div class="error" *ngIf="isConfigured">
+    <title-component label="Votre groupe à déja été configurer" size="big"></title-component>
+    <p>Pas de panique le nécessaire a été fait au niveau de votre groupe ! Vous n'avez plus rien à faire</p>
+  </div>
+</div>
+<div class="spinner" *ngIf="!loaded">
+  <mat-spinner></mat-spinner>
+
+</div>
+

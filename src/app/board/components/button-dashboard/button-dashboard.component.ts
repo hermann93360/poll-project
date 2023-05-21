@@ -13,4 +13,7 @@ export class ButtonDashboardComponent {
   @Input()
   public icon: string = ""
 
+  @Input()
+  public color: string = ""
+
 }

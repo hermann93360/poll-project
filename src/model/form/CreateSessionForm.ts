@@ -1,7 +1,8 @@
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {CreatePollingStationRequest} from "../request/CreatePollingStationRequest";
+import {CreateSessionRequest} from "../request/up/CreateSessionRequest";
 
-export class CreatePollingStationForm {
+export class CreateSessionForm {
 
   private readonly _form: FormGroup;
   private readonly _firstStepForm: FormGroup;
@@ -32,40 +33,33 @@ export class CreatePollingStationForm {
     })
 
     this._secondStepForm = this._formBuilder.group({
+      typeNotation: ['', Validators.required],
       notationVisible: [false, Validators.required],
       scope: ['', Validators.required],
-      pollType: ['', Validators.required],
+      startPoll: ['', Validators.required],
+      endPoll: ['', Validators.required],
+
     })
 
     this._finalStep = this._formBuilder.group({
-      startPoll: ['', Validators.required],
-      endPoll: ['', Validators.required],
       password: [''],
       userLimit: [''],
-      typeNotation: ['', Validators.required],
     })
   }
 
 
 
-  constructRequest(): CreatePollingStationRequest {
+  constructRequest(): CreateSessionRequest {
     const finalStepValues = this.finalStep.value
     const firstStepFormValues = this.firstStepForm.value
     const secondStepFormValues = this.secondStepForm.value
 
-    return new CreatePollingStationRequest(
+    return new CreateSessionRequest(
       firstStepFormValues['name'],
-      firstStepFormValues['category'],
+      secondStepFormValues['scope'],
       firstStepFormValues['description'],
       firstStepFormValues['keywords'].join('-'),
-      finalStepValues['typeNotation'],
-      secondStepFormValues['notationVisible'],
-      this.isPrivate() ?  0 : finalStepValues['userLimit'],
-      secondStepFormValues['scope'],
-      finalStepValues['password'],
-      secondStepFormValues['pollType'],
-      finalStepValues['startPoll'],
-      finalStepValues['endPoll']
+      "0"
     )
   }
 

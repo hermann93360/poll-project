@@ -1,0 +1,50 @@
+<div class="content">
+  <div class="container">
+
+    <div class="form" *ngIf="!summary">
+      <div class="title">
+        <p>Entrez les informations du chef de groupe numéro </p>
+        <span class="number">{{currentNumber}}</span>
+
+      </div>
+      <div class="input">
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input #name matInput placeholder="Nom du chef de groupe" required>
+        </mat-form-field>
+
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Emails</mat-label>
+          <input #email matInput placeholder="Email du chef de groupe" required>
+        </mat-form-field>
+
+      </div>
+
+      <app-button-dashboard (click)="add(name.value, email.value)" label="Ajouter"
+                            icon="add_circle"></app-button-dashboard>
+
+      <div class="informations">
+        <div class="error" *ngIf="error">
+          <p>{{errorMessage[errorNumber]}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form" *ngIf="summary">
+      <title-component label="Recapitulatif des chefs de groupes" size="small"></title-component>
+      <div class="email-admin">
+        <p *ngFor="let administrator of administratorTeam">{{administrator.emailOfRequesting}}</p>
+      </div>
+
+      <app-button-dashboard (click)="resetForm()" label="Recommencer" icon="restart_alt"></app-button-dashboard>
+
+      <div class="title sum">
+        <p>Un mail sera envoyé aux chefs d'équipe afin de configurer leurs groupes </p>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

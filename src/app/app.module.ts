@@ -7,7 +7,7 @@ import {UsersComponent} from './users/users.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AuthenticationComponent} from './users/authentication/authentication.component';
 import {AccountComponent} from './users/account/account.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './home/home.component';
@@ -36,7 +36,7 @@ import {MatSliderModule} from "@angular/material/slider";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
-import {CreatePollingStationForm} from "../model/form/CreatePollingStationForm";
+import {CreateSessionForm} from "../model/form/CreateSessionForm";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { PollingStationUserListComponent } from './board/polling-station-user-list/polling-station-user-list.component';
@@ -50,6 +50,16 @@ import { ButtonStationComponent } from './station/button-station/button-station.
 import { AddUserBtnComponent } from './station/add-user-btn/add-user-btn.component';
 import { NotifyComponent } from './board/header-dash/notify/notify.component';
 import { CardNotificationComponent } from './board/header-dash/notify/card-notification/card-notification.component';
+import { ChooseComponent } from './dashboard/choose/choose.component';
+import {MatEndDateHarness} from "@angular/material/datepicker/testing";
+import { NavSessionComponent } from './dashboard/nav-session/nav-session.component';
+import { CreateSessionComponent } from './dashboard/create-session/create-session.component';
+import { AddGroupComponent } from './dashboard/add-group/add-group.component';
+import { JoinSessionComponent } from './dashboard/join-session/join-session.component';
+import { ConfigureGroupComponent } from './dashboard/configure-group/configure-group.component';
+import { GradeSessionComponent } from './dashboard/grade-session/grade-session.component';
+import { GradeCardComponent } from './dashboard/grade-card/grade-card.component';
+import { ResultsSessionComponent } from './dashboard/results-session/results-session.component';
 
 const appRoutes: Routes = [
   {
@@ -65,8 +75,38 @@ const appRoutes: Routes = [
     ]
   },
   {path: 'dashboard', component: BoardComponent, canActivate: [AuthGuardService], data: {animations: 'dashboard'}},
+  {path: '', component: DashboardComponent, children: [
+      {
+        path: "create",
+        component: CreateSessionComponent,
+        data: {animations: 'create'}
+      },
+      {
+        path: "join/:path",
+        component: JoinSessionComponent,
+        data: {animations: 'join'}
+      },
+      {
+        path: "grade/:sessionId",
+        component: GradeSessionComponent,
+        data: {animations: 'grade'}
+      },
+      {
+        path: "results",
+        component: ResultsSessionComponent,
+        data: {animations: 'results'}
+      },
+
+      {
+        path: "",
+        component: NavSessionComponent
+      }
+    ]},
   {path: 'station/:id', component: StationComponent, canActivate: [AuthGuardService], data: {animations: 'station'}},
-  {path: '', component: HomeComponent},
+  {
+    path: "configure/:groupId",
+    component: ConfigureGroupComponent
+  }
 ];
 
 @NgModule({
@@ -97,6 +137,15 @@ const appRoutes: Routes = [
     AddUserBtnComponent,
     NotifyComponent,
     CardNotificationComponent,
+    ChooseComponent,
+    NavSessionComponent,
+    CreateSessionComponent,
+    AddGroupComponent,
+    JoinSessionComponent,
+    ConfigureGroupComponent,
+    GradeSessionComponent,
+    GradeCardComponent,
+    ResultsSessionComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +169,7 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    FormsModule,
 
   ],
   exports: [

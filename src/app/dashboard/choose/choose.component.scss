@@ -1,0 +1,69 @@
+.content{
+  padding: 10px;
+  box-sizing: border-box;
+  .container{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 456px;
+    width: 373.33px;
+    border-radius: 5px;
+    box-shadow: 0 20px 50px 0 rgba(28,9,80,.07);
+    padding: 50px;
+    box-sizing: border-box;
+    transition: all 200ms ease-in-out 0s;
+  }
+  .container:hover{
+    transform: scale(1.2);
+  }
+  .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    .icon{
+      margin-bottom: 20px;
+      span{
+        background:  linear-gradient(-107deg,#82009f 0%,#f7345e 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        font-size: 50px;
+      }
+      //animation: myAnim 2s ease 0s infinite normal forwards;
+
+    }
+
+    h3{
+      font-family: proximal;
+      font-size: 25px;
+      width: 300px;
+      color: #1c0950;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .body{
+    font-family: proximalLight, serif;
+    font-size: 16px;
+    color: rgba(28,9,80,.5);
+
+    p{
+      text-align: center;
+    }
+  }
+}
+
+@keyframes myAnim {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
