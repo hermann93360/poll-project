@@ -19,6 +19,7 @@ export class GradeSessionComponent implements  OnInit{
   public test: Session = Session.EMPTY;
   public graded = false;
 
+  public sessionId = "";
   public index = 0;
 
   constructor(private sessionService: SessionService, private router: Router) {
@@ -31,6 +32,7 @@ export class GradeSessionComponent implements  OnInit{
         }
         this.grades = new AddGradesInSessionRequest(this.test.sessionId, this.test.personId, []);
         console.log(this.test);
+        console.log(this.grades.sessionId)
         console.log(value);
         this.test = value;
       }
