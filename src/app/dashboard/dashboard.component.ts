@@ -25,16 +25,19 @@ export class DashboardComponent implements OnInit{
             case "/":
               this.title = "Choisissez ce que vous voulez faire ?"
               break
-            case "/session/join":
+            case "/join/grade":
               this.title = "Il sera bientot temps pour vous de voter"
               break
-            case "/session/create":
+            case "/join/results":
+              this.title = "Il sera bientot temps pour vous de voir vos resultats"
+              break
+            case "/create":
               this.title = "Creez votre salon personnalisable"
               break
-            case "/session/grade":
-              this.title = "Creez votre salon personnalisable"
+            case "/grade":
+              this.title = "Il est temps de voter"
               break
-            case "/session/results":
+            case "/results":
               this.title = "Retrouvez les meilleurs prestation"
               break
           }
